@@ -32,12 +32,12 @@ const UserInfo: FC = () => {
         {nickname}
       </span>
       <Button type="link" onClick={logout}>
-        退出
+        logout
       </Button>
     </>
   )
 
-  const Login = <Link to={LOGIN_PATHNAME}>登录</Link>
+  const Login = <Link to={LOGIN_PATHNAME}>login</Link>
 
   return <div>{username ? UserInfo : Login}</div>
 }

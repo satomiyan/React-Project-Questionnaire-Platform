@@ -33,7 +33,7 @@ function getUserInfoFromStorage() {
 const Login: FC = () => {
   const nav = useNavigate()
 
-  const [form] = Form.useForm() // 第三方 hook
+  const [form] = Form.useForm()
 
   useEffect(() => {
     const { username, password } = getUserInfoFromStorage()
@@ -49,10 +49,10 @@ const Login: FC = () => {
       manual: true,
       onSuccess(result) {
         const { token = '' } = result
-        setToken(token) // 存储 token
+        setToken(token)
 
-        message.success('登录成功')
-        nav(MANAGE_INDEX_PATHNAME) // 导航到“我的问卷”
+        message.success('Login successful')
+        nav(MANAGE_INDEX_PATHNAME)
       },
     }
   )
@@ -60,7 +60,7 @@ const Login: FC = () => {
   const onFinish = (values: any) => {
     const { username, password, remember } = values || {}
 
-    run(username, password) // 执行 ajax
+    run(username, password)
 
     if (remember) {
       rememberUser(username, password)
@@ -76,7 +76,7 @@ const Login: FC = () => {
           <Title level={2}>
             <UserAddOutlined />
           </Title>
-          <Title level={2}>用户登录</Title>
+          <Title level={2}>User Login</Title>
         </Space>
       </div>
       <div>
@@ -88,32 +88,35 @@ const Login: FC = () => {
           form={form}
         >
           <Form.Item
-            label="用户名"
+            label="Username"
             name="username"
             rules={[
-              { required: true, message: '请输入用户名' },
-              { type: 'string', min: 5, max: 20, message: '字符长度在 5-20 之间' },
-              { pattern: /^\w+$/, message: '只能是字母数字下划线' },
+              { required: true, message: 'Please enter your username' },
+              { type: 'string', min: 5, max: 20, message: 'Length must be between 5–20 characters' },
+              { pattern: /^\w+$/, message: 'Only letters, numbers, and underscores are allowed' },
             ]}
           >
             <Input />
           </Form.Item>
+
           <Form.Item
-            label="密码"
+            label="Password"
             name="password"
-            rules={[{ required: true, message: '请输入密码' }]}
+            rules={[{ required: true, message: 'Please enter your password' }]}
           >
             <Input.Password />
           </Form.Item>
+
           <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 6, span: 16 }}>
-            <Checkbox>记住我</Checkbox>
+            <Checkbox>Remember me</Checkbox>
           </Form.Item>
+
           <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
             <Space>
               <Button type="primary" htmlType="submit">
-                登录
+                Login
               </Button>
-              <Link to={REGISTER_PATHNAME}>注册新用户</Link>
+              <Link to={REGISTER_PATHNAME}>Register</Link>
             </Space>
           </Form.Item>
         </Form>

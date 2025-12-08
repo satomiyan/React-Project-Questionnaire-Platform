@@ -10,27 +10,14 @@ const ManageLayout: FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
 
-  // const [loading, setLoading] = useState(false)
-  // async function handleCreateClick() {
-  //   setLoading(true)
-  //   const data = await createQuestionService()
-  //   const { id } = data || {}
-  //   if (id) {
-  //     nav(`/question/edit/${id}`)
-  //     message.success('创建成功')
-  //   }
-  //   setLoading(false)
-  // }
-
   const {
     loading,
-    // error,
     run: handleCreateClick,
   } = useRequest(createQuestionService, {
     manual: true,
     onSuccess(result) {
       nav(`/question/edit/${result.id}`)
-      message.success('创建成功')
+      message.success('Created successfully')
     },
   })
 
@@ -45,35 +32,40 @@ const ManageLayout: FC = () => {
             onClick={handleCreateClick}
             disabled={loading}
           >
-            新建问卷
+            Create Questionnaire
           </Button>
+
           <Divider style={{ borderTop: 'transparent' }} />
+
           <Button
             type={pathname.startsWith('/manage/list') ? 'default' : 'text'}
             size="large"
             icon={<BarsOutlined />}
             onClick={() => nav('/manage/list')}
           >
-            我的问卷
+            My Questionnaires
           </Button>
+
           <Button
             type={pathname.startsWith('/manage/star') ? 'default' : 'text'}
             size="large"
             icon={<StarOutlined />}
             onClick={() => nav('/manage/star')}
           >
-            星标问卷
+            Starred
           </Button>
+
           <Button
             type={pathname.startsWith('/manage/trash') ? 'default' : 'text'}
             size="large"
             icon={<DeleteOutlined />}
             onClick={() => nav('/manage/trash')}
           >
-            回收站
+            Trash
           </Button>
         </Space>
       </div>
+
       <div className={styles.right}>
         <Outlet />
       </div>

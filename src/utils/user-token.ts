@@ -1,7 +1,4 @@
-/**
- * @description 存储/获取 user token
- * @author 双越老师
- */
+
 
 const KEY = 'USER_TOKEN'
 

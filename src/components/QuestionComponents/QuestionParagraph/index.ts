@@ -1,7 +1,4 @@
-/**
- * @description 问卷 - 段落
- * @author 双越老师
- */
+
 
 import Component from './Component'
 import PropComponent from './PropComponent'
