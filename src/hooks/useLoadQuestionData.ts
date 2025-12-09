@@ -13,7 +13,7 @@ function useLoadQuestionData() {
   // ajax 加载
   const { data, loading, error, run } = useRequest(
     async (id: string) => {
-      if (!id) throw new Error('没有问卷 id')
+      if (!id) throw new Error('no questionnaire id')
       const data = await getQuestionService(id)
       return data
     },

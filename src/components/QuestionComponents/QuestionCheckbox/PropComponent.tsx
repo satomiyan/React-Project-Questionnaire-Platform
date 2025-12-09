@@ -34,49 +34,57 @@ const PropComponent: FC<QuestionCheckboxPropsType> = (props: QuestionCheckboxPro
       disabled={disabled}
       onValuesChange={handleValuesChange}
     >
-      <Form.Item label="标题" name="title" rules={[{ required: true, message: '请输入标题' }]}>
+      {/* Title */}
+      <Form.Item
+        label="Title"
+        name="title"
+        rules={[{ required: true, message: 'Please enter a title' }]}
+      >
         <Input />
       </Form.Item>
-      <Form.Item label="选项">
+
+      {/* Options */}
+      <Form.Item label="Options">
         <Form.List name="list">
           {(fields, { add, remove }) => (
             <>
-              {/* 遍历所有的选项（可删除） */}
+              {/* Loop through options */}
               {fields.map(({ key, name }, index) => {
                 return (
                   <Space key={key} align="baseline">
-                    {/* 当前选项 是否选中 */}
+                    {/* Checkbox */}
                     <Form.Item name={[name, 'checked']} valuePropName="checked">
                       <Checkbox />
                     </Form.Item>
-                    {/* 当前选项 输入框 */}
+
+                    {/* Text input for option */}
                     <Form.Item
                       name={[name, 'text']}
                       rules={[
-                        { required: true, message: '请输入选项文字' },
+                        { required: true, message: 'Please enter option text' },
                         {
                           validator: (_, text) => {
                             const { list = [] } = form.getFieldsValue()
                             let num = 0
                             list.forEach((opt: OptionType) => {
-                              if (opt.text === text) num++ // 记录 text 相同的个数，预期只有 1 个（自己）
+                              if (opt.text === text) num++
                             })
                             if (num === 1) return Promise.resolve()
-                            return Promise.reject(new Error('和其他选项重复了'))
+                            return Promise.reject(new Error('Duplicate option text'))
                           },
                         },
                       ]}
                     >
-                      <Input placeholder="输入选项文字..." />
+                      <Input placeholder="Enter option text..." />
                     </Form.Item>
 
-                    {/* 当前选项 删除按钮 */}
+                    {/* Remove option button */}
                     {index > 0 && <MinusCircleOutlined onClick={() => remove(name)} />}
                   </Space>
                 )
               })}
 
-              {/* 添加选项 */}
+              {/* Add option */}
               <Form.Item>
                 <Button
                   type="link"
@@ -84,15 +92,17 @@ const PropComponent: FC<QuestionCheckboxPropsType> = (props: QuestionCheckboxPro
                   icon={<PlusOutlined />}
                   block
                 >
-                  添加选项
+                  Add Option
                 </Button>
               </Form.Item>
             </>
           )}
         </Form.List>
       </Form.Item>
+
+      {/* Vertical arrangement */}
       <Form.Item name="isVertical" valuePropName="checked">
-        <Checkbox>竖向排列</Checkbox>
+        <Checkbox>Arrange vertically</Checkbox>
       </Form.Item>
     </Form>
   )

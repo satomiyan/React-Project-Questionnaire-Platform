@@ -26,7 +26,7 @@ const Layers: FC = () => {
   function handleTitleClick(fe_id: string) {
     const curComp = componentList.find(c => c.fe_id === fe_id)
     if (curComp && curComp.isHidden) {
-      message.info('不能选中隐藏的组件')
+      message.info('cannot select hidden component')
       return
     }
     if (fe_id !== selectedId) {

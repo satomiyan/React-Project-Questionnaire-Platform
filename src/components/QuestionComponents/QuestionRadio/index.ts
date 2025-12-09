@@ -8,7 +8,7 @@ import { QuestionRadioDefaultProps } from './interface'
 export * from './interface'
 
 export default {
-  title: '单选',
+  title: 'Radio',
   type: 'questionRadio',
   Component,
   PropComponent,

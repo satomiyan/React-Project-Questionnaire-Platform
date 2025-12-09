@@ -68,7 +68,7 @@ const StatHeader: FC = () => {
     return (
       <Space>
         <Input value={url} style={{ width: '300px' }} ref={urlInputRef} />
-        <Tooltip title="拷贝链接">
+        <Tooltip title="copy link">
           <Button icon={<CopyOutlined />} onClick={copy}></Button>
         </Tooltip>
         <Popover content={QRCodeElem}>
@@ -84,7 +84,7 @@ const StatHeader: FC = () => {
         <div className={styles.left}>
           <Space>
             <Button type="link" icon={<LeftOutlined />} onClick={() => nav(-1)}>
-              返回
+              back
             </Button>
             <Title>{title}</Title>
           </Space>
@@ -92,7 +92,7 @@ const StatHeader: FC = () => {
         <div className={styles.main}>{LinkAndQRCodeElem}</div>
         <div className={styles.right}>
           <Button type="primary" onClick={() => nav(`/question/edit/${id}`)}>
-            编辑问卷
+            edit questionnaire
           </Button>
         </div>
       </div>

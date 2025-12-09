@@ -34,7 +34,7 @@ const ListSearch: FC = () => {
     <Search
       size="large"
       allowClear
-      placeholder="输入关键字"
+      placeholder="please type keyword"
       value={value}
       onChange={handleChange}
       onSearch={handleSearch}

@@ -78,7 +78,7 @@ const SaveButton: FC = () => {
 
   return (
     <Button onClick={save} disabled={loading} icon={loading ? <LoadingOutlined /> : null}>
-      保存
+      save
     </Button>
   )
 }
@@ -110,7 +110,7 @@ const PublishButton: FC = () => {
 
   return (
     <Button type="primary" onClick={pub} disabled={loading}>
-      发布
+      publish
     </Button>
   )
 }
@@ -125,7 +125,7 @@ const EditHeader: FC = () => {
         <div className={styles.left}>
           <Space>
             <Button type="link" icon={<LeftOutlined />} onClick={() => nav(-1)}>
-              返回
+              back
             </Button>
             <TitleElem />
           </Space>

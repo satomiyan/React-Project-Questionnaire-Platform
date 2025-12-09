@@ -50,17 +50,17 @@ const componentConfList: ComponentConfType[] = [
 export const componentConfGroup = [
   {
     groupId: 'textGroup',
-    groupName: '文本显示',
+    groupName: 'Text Display',
     components: [QuestionInfoConf, QuestionTitleConf, QuestionParagraphConf],
   },
   {
     groupId: 'inputGroup',
-    groupName: '用户输入',
+    groupName: 'User Input',
     components: [QuestionInputConf, QuestionTextareaConf],
   },
   {
     groupId: 'chooseGroup',
-    groupName: '用户选择',
+    groupName: 'User Selection',
     components: [QuestionRadioConf, QuestionCheckboxConf],
   },
 ]

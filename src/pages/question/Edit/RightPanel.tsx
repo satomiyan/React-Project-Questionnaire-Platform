@@ -26,7 +26,7 @@ const RightPanel: FC = () => {
       label: (
         <span>
           <FileTextOutlined />
-          属性
+          props
         </span>
       ),
       children: <ComponentProp />,
@@ -36,7 +36,7 @@ const RightPanel: FC = () => {
       label: (
         <span>
           <SettingOutlined />
-          页面设置
+          page setting
         </span>
       ),
       children: <PageSetting />,

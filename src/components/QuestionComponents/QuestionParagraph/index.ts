@@ -8,7 +8,7 @@ export * from './interface'
 
 // Paragraph 组件的配置
 export default {
-  title: '段落',
+  title: 'paragraph',
   type: 'questionParagraph', // 要和后端统一好
   Component,
   PropComponent,

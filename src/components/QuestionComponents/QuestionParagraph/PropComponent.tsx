@@ -27,14 +27,15 @@ const PropComponent: FC<QuestionParagraphPropsType> = (props: QuestionParagraphP
       form={form}
     >
       <Form.Item
-        label="段落内容"
+        label="Paragraph Content"
         name="text"
-        rules={[{ required: true, message: '请输入段落内容' }]}
+        rules={[{ required: true, message: 'Please enter paragraph content' }]}
       >
         <TextArea />
       </Form.Item>
+
       <Form.Item name="isCenter" valuePropName="checked">
-        <Checkbox>居中显示</Checkbox>
+        <Checkbox>Align Center</Checkbox>
       </Form.Item>
     </Form>
   )

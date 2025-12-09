@@ -11,7 +11,7 @@ const LeftPanel: FC = () => {
       label: (
         <span>
           <AppstoreOutlined />
-          组件库
+          Component lib
         </span>
       ),
       children: <ComponentLib />,
@@ -21,7 +21,7 @@ const LeftPanel: FC = () => {
       label: (
         <span>
           <BarsOutlined />
-          图层
+          layers
         </span>
       ),
       children: <Layers />,

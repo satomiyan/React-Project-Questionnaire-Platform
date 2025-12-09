@@ -11,18 +11,18 @@ import styles from './common.module.scss'
 const { Title } = Typography
 
 const List: FC = () => {
-  useTitle('小慕问卷 - 我的问卷')
+  useTitle('Sedona Questionnaire - My Surveys')
 
-  const [started, setStarted] = useState(false) // 是否已经开始加载（防抖，有延迟时间）
-  const [page, setPage] = useState(1) // List 内部的数据，不在 url 参数中体现
-  const [list, setList] = useState([]) // 全部的列表数据，上划加载更多，累计
+  const [started, setStarted] = useState(false) // whether loading has started (debounced)
+  const [page, setPage] = useState(1) // internal page state, not shown in URL
+  const [list, setList] = useState([]) // accumulated data
   const [total, setTotal] = useState(0)
-  const haveMoreData = total > list.length // 有没有更多的、为加载完成的数据
+  const haveMoreData = total > list.length
 
-  const [searchParams] = useSearchParams() // url 参数，虽然没有 page pageSize ，但有 keyword
+  const [searchParams] = useSearchParams()
   const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || ''
 
-  // keyword 变化时，重置信息
+  // Reset when keyword changes
   useEffect(() => {
     setStarted(false)
     setPage(1)
@@ -30,7 +30,7 @@ const List: FC = () => {
     setTotal(0)
   }, [keyword])
 
-  // 真正加载
+  // Load data
   const { run: load, loading } = useRequest(
     async () => {
       const data = await getQuestionListService({
@@ -44,24 +44,24 @@ const List: FC = () => {
       manual: true,
       onSuccess(result) {
         const { list: l = [], total = 0 } = result
-        setList(list.concat(l)) // 累计
+        setList(list.concat(l))
         setTotal(total)
         setPage(page + 1)
       },
     }
   )
 
-  // 尝试去触发加载 - 防抖
+  // Try to load more (debounced)
   const containerRef = useRef<HTMLDivElement>(null)
   const { run: tryLoadMore } = useDebounceFn(
     () => {
       const elem = containerRef.current
-      if (elem == null) return
+      if (!elem) return
       const domRect = elem.getBoundingClientRect()
-      if (domRect == null) return
+      if (!domRect) return
       const { bottom } = domRect
       if (bottom <= document.body.clientHeight) {
-        load() // 真正加载数据
+        load()
         setStarted(true)
       }
     },
@@ -70,48 +70,47 @@ const List: FC = () => {
     }
   )
 
-  // 1. 当页面加载，或者 url 参数（keyword）变化时，触发加载
+  // Trigger load on page load or keyword change
   useEffect(() => {
-    tryLoadMore() // 加载第一页，初始化
+    tryLoadMore()
   }, [searchParams])
 
-  // 2. 当页面滚动时，要尝试触发加载
+  // Trigger load on scroll
   useEffect(() => {
     if (haveMoreData) {
-      window.addEventListener('scroll', tryLoadMore) // 防抖
+      window.addEventListener('scroll', tryLoadMore)
     }
-
-    return () => {
-      window.removeEventListener('scroll', tryLoadMore) // 解绑事件，重要！！！
-    }
+    return () => window.removeEventListener('scroll', tryLoadMore)
   }, [searchParams, haveMoreData])
 
-  // LoadMore Elem
+  // Load more content area
   const LoadMoreContentElem = useMemo(() => {
     if (!started || loading) return <Spin />
-    if (total === 0) return <Empty description="暂无数据" />
-    if (!haveMoreData) return <span>没有更多了...</span>
-    return <span>开始加载下一页</span>
+    if (total === 0) return <Empty description="No data available" />
+    if (!haveMoreData) return <span>No more results...</span>
+    return <span>Loading next page...</span>
   }, [started, loading, haveMoreData])
 
   return (
     <>
       <div className={styles.header}>
         <div className={styles.left}>
-          <Title level={3}>我的问卷</Title>
+          <Title level={3}>My Surveys</Title>
         </div>
         <div className={styles.right}>
           <ListSearch />
         </div>
       </div>
+
       <div className={styles.content}>
-        {/* 问卷列表 */}
+        {/* Survey list */}
         {list.length > 0 &&
           list.map((q: any) => {
             const { _id } = q
             return <QuestionCard key={_id} {...q} />
           })}
       </div>
+
       <div className={styles.footer}>
         <div ref={containerRef}>{LoadMoreContentElem}</div>
       </div>

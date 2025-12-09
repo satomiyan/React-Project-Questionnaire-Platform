@@ -18,7 +18,8 @@ const ChartStat: FC<PropsType> = (props: PropsType) => {
 
   const [stat, setStat] = useState([])
   const { run } = useRequest(
-    async (questionId, componentId) => await getComponentStatService(questionId, componentId),
+    async (questionId, componentId) =>
+      await getComponentStatService(questionId, componentId),
     {
       manual: true,
       onSuccess(res) {
@@ -31,19 +32,19 @@ const ChartStat: FC<PropsType> = (props: PropsType) => {
     if (selectedComponentId) run(id, selectedComponentId)
   }, [id, selectedComponentId])
 
-  // 生成统计图表
+  // Generate statistics chart
   function genStatElem() {
-    if (!selectedComponentId) return <div>未选中组件</div>
+    if (!selectedComponentId) return <div>No component selected</div>
 
     const { StatComponent } = getComponentConfByType(selectedComponentType) || {}
-    if (StatComponent == null) return <div>该组件无统计图表</div>
+    if (StatComponent == null) return <div>No available statistics for this component</div>
 
     return <StatComponent stat={stat} />
   }
 
   return (
     <>
-      <Title level={3}>图表统计</Title>
+      <Title level={3}>Statistics Chart</Title>
       <div>{genStatElem()}</div>
     </>
   )

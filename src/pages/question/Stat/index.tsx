@@ -20,7 +20,7 @@ const Stat: FC = () => {
   const [selectedComponentType, setSelectedComponentType] = useState('')
 
   // 修改标题
-  useTitle(`问卷统计 - ${title}`)
+  useTitle(`questionnaire statistics - ${title}`)
 
   // loading 效果
   const LoadingELem = (
@@ -36,10 +36,10 @@ const Stat: FC = () => {
         <div style={{ flex: '1' }}>
           <Result
             status="warning"
-            title="该页面尚未发布"
+            title="this page has not been published"
             extra={
               <Button type="primary" onClick={() => nav(-1)}>
-                返回
+                back
               </Button>
             }
           ></Result>

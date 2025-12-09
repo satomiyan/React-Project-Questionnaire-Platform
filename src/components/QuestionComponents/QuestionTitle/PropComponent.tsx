@@ -29,23 +29,25 @@ const PropComponent: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType
       disabled={disabled}
     >
       <Form.Item
-        label="标题内容"
+        label="Title Text"
         name="text"
-        rules={[{ required: true, message: '请输入标题内容' }]}
+        rules={[{ required: true, message: 'Please enter title text' }]}
       >
         <Input />
       </Form.Item>
-      <Form.Item label="层级" name="level">
+
+      <Form.Item label="Heading Level" name="level">
         <Select
           options={[
-            { value: 1, text: 1 },
-            { value: 2, text: 2 },
-            { value: 3, text: 3 },
+            { value: 1, text: 'H1' },
+            { value: 2, text: 'H2' },
+            { value: 3, text: 'H3' },
           ]}
-        ></Select>
+        />
       </Form.Item>
+
       <Form.Item name="isCenter" valuePropName="checked">
-        <Checkbox>居中显示</Checkbox>
+        <Checkbox>Center Align</Checkbox>
       </Form.Item>
     </Form>
   )
